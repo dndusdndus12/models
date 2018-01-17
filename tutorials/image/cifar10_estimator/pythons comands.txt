@@ -1,0 +1,27 @@
+===Data downloads and initial setting===
+python generate_cifar10_tfrecords.py --data-dir=${PWD}/cifar-10-data
+
+
+===CPU Only command===
+python cifar10_main.py --data-dir=data/cifar-10-data ^
+                       --job-dir=/tmp/cifar10 ^
+                       --num-gpus=0 ^
+                       --train-steps=1000
+
+
+===2GPU using CPU as a parameter server===
+python cifar10_main.py --data-dir=data/cifar-10-data \
+                       --job-dir=/tmp/cifar10 \
+                       --num-gpus=2 \
+                       --train-steps=1000
+
+
+===2GPUs using GPU as a parameter serever===
+python cifar10_main.py --data-dir=data/cifar-10-data \
+                       --job-dir=/tmp/cifar10 \
+                       --variable-strategy GPU \
+                       --num-gpus=2 \
+
+
+===Extra commands===
+tensorboard --log-dir="<job dir>"
